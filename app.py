@@ -105,7 +105,11 @@ def save_network_code():
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    # For debugging, we will generate the full redirect URI here
+    # so we can see it on the login page itself.
+    # The _external=True flag tells Flask to build the full, absolute URL.
+    full_redirect_uri = url_for('callback', _external=True)
+    return render_template('login.html', debug_redirect_uri=full_redirect_uri)
 
 
 @app.route('/logout')
