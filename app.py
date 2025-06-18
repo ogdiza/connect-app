@@ -17,6 +17,7 @@ app.secret_key = os.getenv('FLASK_SECRET_KEY')
 CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
 REDIRECT_URI = os.getenv('GOOGLE_REDIRECT_URI')
+
 SCOPES = [
     'https://www.googleapis.com/auth/admanager',
     'https://www.googleapis.com/auth/userinfo.email',
@@ -147,6 +148,22 @@ def callback():
     session['user_info'] = user_info
     
     return redirect(url_for('home'))
+@app.route('/debug')
+def debug():
+    # This page will show us the exact configuration the live server is using.
+    # This helps us see if our environment variables are being loaded correctly.
+    output = f"""
+    <h1>Application Configuration Debug</h1>
+    <p>This page shows the settings your app is currently running with on the server.</p>
+    <hr>
+    <h2>Values from Environment Variables:</h2>
+    <p><b>GOOGLE_CLIENT_ID:</b> {os.getenv('GOOGLE_CLIENT_ID')}</p>
+    <p><b>GOOGLE_REDIRECT_URI:</b> {os.getenv('GOOGLE_REDIRECT_URI')}</p>
+    <hr>
+    <h2>Value Being Used in the Code:</h2>
+    <p><b>REDIRECT_URI variable is set to:</b> {REDIRECT_URI}</p>
+    """
+    return output
 
 # --- Run the App ---
 if __name__ == '__main__':
