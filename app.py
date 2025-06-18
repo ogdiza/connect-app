@@ -11,6 +11,8 @@ load_dotenv()
 
 # --- App Configuration ---
 app = Flask(__name__)
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')
 
 # --- Google OAuth Configuration ---
