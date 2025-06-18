@@ -18,7 +18,7 @@ app.secret_key = os.getenv('FLASK_SECRET_KEY')
 # --- Google OAuth Configuration ---
 CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
-REDIRECT_URI = os.getenv('GOOGLE_REDIRECT_URI')
+REDIRECT_URI = os.getenv('https://connect-app-np6z.onrender.com/callback')
 
 SCOPES = [
     'https://www.googleapis.com/auth/admanager',
